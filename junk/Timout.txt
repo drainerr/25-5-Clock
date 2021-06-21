@@ -1,0 +1,12 @@
+        // setTimeout(function(){
+        //     if(defminutes <= '0'){
+        //         if(defsecs <= '1'){
+        //             label.innerHTML = "Session";
+        //             breakValue.innerHTML = 5;
+        //             sessionValue.innerHTML = 25;
+        //             timeLeft.innerHTML = "25" + ":" +"00";
+        //             clearInterval(secsInterval);
+        //             clearInterval(interval);     
+        //         } 
+        //     }
+        // },fooForTimout()); 

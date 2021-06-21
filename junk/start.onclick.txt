@@ -1,0 +1,24 @@
+startTimer.onclick = function (){
+    disableButtons(true);
+    if(isStarted==false && defsecs == "00") {
+        defsecs=59;
+        defminutes--;
+        secsInterval = setInterval(function(){
+            defsecs--;
+            timeLeft.innerHTML = defminutes + ":" +defsecs;
+            if(defsecs <= 0){
+                defsecs= 60;       
+        }
+        },1000);
+        interval = setInterval(function(){
+            defminutes--;
+            timeLeft.innerHTML = defminutes + ":" + defsecs;    
+        },60000); 
+        // if(defminutes == '0' && defsecs == "00") {   
+        //     // alert('thats it')             /// es sami xazi amovige interval - intervalidan
+        //     // clearInterval(secsInterval);
+        //     // defminutes = breaks();
+        // }
+        isStarted=true;      
+    } 
+};

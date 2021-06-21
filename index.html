@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>25+5 Clock</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <div id="pomodoro">
+        <div id="projectName">
+            <h1>Pomodoro Clock</h1>
+        </div>
+        <div id="break-session">
+            <div id="break">
+                <h3 id="break-label">Break Length</h3>
+                <div id="break-content">
+                    <audio id="audio" src="sound/Alarm.mp3"></audio>
+                    <button id="break-decrement">-</button>
+                    <h4 id="break-length">5</h4>
+                    <button id="break-increment">+</button>
+                </div>
+            </div>
+            <div id="session">
+                <h3 id="session-label">Session Length</h3>
+                <div id="session-content">
+                    <button id="session-decrement">-</button>
+                    <h4 id="session-length">25</h4>
+                    <button id="session-increment">+</button>
+                </div>
+            </div>
+        </div>
+        <div id="timer">
+            <h3 id="timer-label">Session</h3>
+            <h1 id="time-left"></h1>
+        </div>
+        <div id="timer-controls">
+            <button id="start_stop">START</button>
+            <button id="reset">RESET</button>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  border-radius: 20px;
+  background: #0F2027;
+  background: -webkit-gradient(linear, left top, right top, from(#2C5364), color-stop(#203A43), to(#0F2027));
+  background: linear-gradient(to right, #2C5364, #203A43, #0F2027);
+  font-family: 'Inter', sans-serif;
+  font-weight: lighter;
+  color: white;
+}
+
+body #pomodoro {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+body #pomodoro #projectName {
+  margin-bottom: 12em;
+}
+
+body #pomodoro #break-session {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 50vw;
+  margin-bottom: 3em;
+  margin-top: -8em;
+}
+
+body #pomodoro #break-session #break #break-content {
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 1.5em;
+}
+
+body #pomodoro #break-session #break #break-content button {
+  width: 20px;
+  border: white solid;
+  color: white;
+  background-color: darkslategrey;
+}
+
+body #pomodoro #break-session #break #break-content button:active {
+  background-color: green;
+}
+
+body #pomodoro #break-session #session #session-content {
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 1.5em;
+}
+
+body #pomodoro #break-session #session #session-content button {
+  width: 20px;
+  border: white solid;
+  color: white;
+  border-radius: 50%;
+  background-color: darkslategrey;
+}
+
+body #pomodoro #break-session #session #session-content button:active {
+  background-color: green;
+}
+
+body #pomodoro #timer {
+  text-align: center;
+  font-size: 1.3em;
+  border: solid;
+  padding: 30px;
+  border-radius: 20px;
+  background: #0F2027;
+  background: -webkit-gradient(linear, left top, right top, from(#2C5364), color-stop(#203A43), to(#0F2027));
+  background: linear-gradient(to right, #2C5364, #203A43, #0F2027);
+}
+
+body #pomodoro #timer-controls {
+  margin-top: 1em;
+}
+
+body #pomodoro #timer-controls button {
+  padding: 5px;
+  border-radius: 5px;
+  font-weight: bold;
+  border: white solid;
+  color: white;
+  background-color: darkslategrey;
+}
+
+body #pomodoro #timer-controls button:active {
+  background-color: green;
+}
+/*# sourceMappingURL=style.css.map */
