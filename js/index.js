@@ -162,7 +162,7 @@ let breakInterval = () =>{
 }
 }
 
-/// start Timer
+/// start
 
 
 startTimer.onclick = function (){
@@ -175,7 +175,7 @@ startTimer.onclick = function (){
 };
 ///////////////////
 
-/// reset Timer
+/// reset
 
 reset.onclick = function(){
     breakValue.innerHTML = 5;
