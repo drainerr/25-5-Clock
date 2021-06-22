@@ -19,7 +19,7 @@ let defTimerState = ()=> {
 defTimerState;
 ///////////////////
 
-//function to disable buttons while timer is active
+// to disable buttons while timer is active
 function disableButtons(bool){
     breakInc.disabled = bool;
     breakDec.disabled = bool;
