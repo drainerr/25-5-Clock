@@ -10,14 +10,14 @@ const sesDec =document.getElementById('session-decrement');
 const label = document.getElementById('timer-label');
 const audio = document.getElementById('audio');
 
-///seting default minutes and seconds
+/// default minutes and seconds
 let defminutes = "25";
 let defsecs = "00";
-let defTimerState = ()=> {timeLeft.innerHTML = defminutes + ":" + defsecs;
+let defTimerState = ()=> {
+    timeLeft.innerHTML = defminutes + ":" + defsecs;
 }
 defTimerState;
-
-///////////////////////////////////
+///////////////////
 
 //function to disable buttons while timer is active
 function disableButtons(bool){
@@ -27,23 +27,29 @@ function disableButtons(bool){
     sesDec.disabled = bool;
 }
 
-///////////////////////////////////
+///////////////////
 
 // onclick events for increase-decrease buttons
 defTimerState();
 let sessions =() => {
 sesInc.onclick = function(){
     sessionValue.innerHTML++;
-    if(sessionValue.innerHTML>60){
+    defminutes = sessionValue.innerHTML;
+    if(sessionValue.innerHTML > 60){
         sessionValue.innerHTML = 60;
+        defminutes = sessionValue.innerHTML;
         alert('You Reach The Limit!')
     }
+    timeLeft.innerHTML = defminutes + ":" + "00";
 }
 sesDec.onclick = function(){
     sessionValue.innerHTML--;
+    defminutes = sessionValue.innerHTML;
     if(sessionValue.innerHTML < 1){
         sessionValue.innerHTML = 1;
+        defminutes = sessionValue.innerHTML;
     }
+    timeLeft.innerHTML = defminutes + ":" + "00";
 }
     return sessionValue.innerHTML;
 
@@ -69,13 +75,13 @@ breakDec.onclick = function(){
 };
 breaks();
 
-///////////////////////////////////
+///////////////////
 
-
-///declaring variables for setIntervals 
+/// variables for setIntervals 
 
 let interval;
 let secsInterval;
+let breaksInterval;
 let isStarted = false;
 
 
@@ -93,10 +99,9 @@ let secInterval = ()=>{
         }
     },1000);
 }
+///////////////////
 
-///////////////////////////////////
-
-
+let flag = false;
 /// setinterval for minutes
 
 let minsInterval =() =>{
@@ -105,28 +110,30 @@ let minsInterval =() =>{
         defminutes--;
         if (defminutes <= '0') {   
             if(defsecs <= '59'){
+                if(flag == false){
                 breakFoo();
+            }
             }
         }
         timeLeft.innerHTML = defminutes + ":" + defsecs;    
     },60000); 
 } 
 
-///////////////////////////////////
+///////////////////
 
-
-///break function (needs to be fixed)
+///break function 
 
 let breakFoo =()=>{
     label.innerHTML = "Break";
-    defminutes = breaks()-1;
-    // audio.play();
+    audio.play();
     breakInterval();
+    flag=true;
 }
 
 let breakInterval = () =>{
+    defminutes = breaks()-1;
+    if(defminutes >= '0'){
     setInterval(() => {
-        defminutes--; 
             if(defminutes <= '0'){
                 if(defsecs <= '59'){
                     label.innerHTML = "Session";
@@ -137,10 +144,25 @@ let breakInterval = () =>{
                     clearInterval(interval);     
                 } 
             }
-    }, 60000);  
+    }, 60000);  isStarted = true;
+} else {
+    clearInterval(minsInterval);
+    setInterval(() => {
+        if(defminutes <= '0'){
+            if(defsecs <= '59'){
+                label.innerHTML = "Session";
+                breakValue.innerHTML = 5;
+                sessionValue.innerHTML = 25;
+                timeLeft.innerHTML = "25" + ":" +"00";
+                clearInterval(secsInterval);
+                clearInterval(interval);     
+            } 
+        }
+    }, 60000);  isStarted = true;
+}
 }
 
-/// start event
+/// start Timer
 
 
 startTimer.onclick = function (){
@@ -151,9 +173,9 @@ startTimer.onclick = function (){
      isStarted=true;      
     } 
 };
-///////////////////////////////////
+///////////////////
 
-///reset event
+/// reset Timer
 
 reset.onclick = function(){
     breakValue.innerHTML = 5;
@@ -161,7 +183,8 @@ reset.onclick = function(){
     timeLeft.innerHTML = "25" + ":" +"00";
     clearInterval(secsInterval)
     clearInterval(interval);
+    defsecs = '00'; ///   <---- fixed
     disableButtons(false);
     isStarted=false;
 };
-///////////////////////////////////
+///////////////////
