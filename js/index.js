@@ -89,7 +89,7 @@ let isStarted = false;
 
 let secInterval = ()=>{
     if(defsecs == "00")   
-    defsecs=59;
+    defsecs=60;
     defminutes--;
     secsInterval = setInterval(function(){
         defsecs--;
