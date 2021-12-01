@@ -100,6 +100,7 @@ const timerFoo = (sesBreakVal, callBack, audio) => {
 
 startTimer.addEventListener('click',  () => {
     timerFoo(sessionValue, breakHandler, sessionIsOver)
+    startTimer.disabled = true;
 })  
 
 const resetHandler = () => {
@@ -118,4 +119,5 @@ const breakHandler = () => {
 reset.addEventListener('click', ()=>{
     clearInterval(timer);
     resetHandler();
+    startTimer.disabled = false;
 })
