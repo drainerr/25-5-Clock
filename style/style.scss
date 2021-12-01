@@ -77,10 +77,14 @@ body{
             text-align:center;
             font-size:1.3em;
             border:solid;
+            width:200px;
             padding:30px;
             border-radius:20px;background: #0F2027; 
             background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027); 
             background: linear-gradient(to right, #2C5364, #203A43, #0F2027); 
+            #time-left{
+                font-size:32px;
+            }
         }
         #timer-controls{
             margin-top:1em;

@@ -10,181 +10,122 @@ const sesDec =document.getElementById('session-decrement');
 const label = document.getElementById('timer-label');
 const audio = document.getElementById('audio');
 
-/// default minutes and seconds
-let defminutes = "25";
-let defsecs = "00";
-let defTimerState = ()=> {
-    timeLeft.innerHTML = defminutes + ":" + defsecs;
+let minutes,seconds;
+const defTimerState = ()=> {
+    label.innerHTML = 'Session';
+    timeLeft.innerHTML = '25 : 00';
+    breakValue.innerHTML = 5;
+    sessionValue.innerHTML = 25;
+    minutes=25;
+    seconds=0;
 }
-defTimerState;
-///////////////////
+defTimerState();
 
-// to disable buttons while timer is active
-function disableButtons(bool){
+const disableButtons = (bool) => {
     breakInc.disabled = bool;
     breakDec.disabled = bool;
     sesInc.disabled = bool;
     sesDec.disabled = bool;
 }
 
-///////////////////
-
-// onclick events for increase-decrease buttons
-defTimerState();
-let sessions =() => {
-sesInc.onclick = function(){
-    sessionValue.innerHTML++;
-    defminutes = sessionValue.innerHTML;
+const sesIncDecHandler = ()=> {
     if(sessionValue.innerHTML > 60){
         sessionValue.innerHTML = 60;
-        defminutes = sessionValue.innerHTML;
         alert('You Reach The Limit!')
-    }
-    timeLeft.innerHTML = defminutes + ":" + "00";
+    } 
+    if(sessionValue.innerHTML < 1) 
+        sessionValue.innerHTML = 1;
+    minutes = sessionValue.innerHTML;
+    timeLeft.innerHTML = 
+    `${minutes < 10 && minutes > 0 ? minutes = '0' + minutes : minutes} : 00`;
+    
 }
+
+sesInc.addEventListener('click', ()=>{
+    sessionValue.innerHTML++;
+    sesIncDecHandler();
+
+})
+    
 sesDec.onclick = function(){
     sessionValue.innerHTML--;
-    defminutes = sessionValue.innerHTML;
-    if(sessionValue.innerHTML < 1){
-        sessionValue.innerHTML = 1;
-        defminutes = sessionValue.innerHTML;
-    }
-    timeLeft.innerHTML = defminutes + ":" + "00";
+   sesIncDecHandler();
 }
-    return sessionValue.innerHTML;
-
-};
-sessions();
 
 
-let breaks = () => {
-breakInc.onclick = function(){
-    breakValue.innerHTML++;
+const breakIncDecHandler = () => {
     if(breakValue.innerHTML>25){
         breakValue.innerHTML = 25;
         alert('You Reach The Limit!')
-    }
+    } 
+    if(breakValue.innerHTML < 1)
+        breakValue.innerHTML = 1;
+}
+
+breakInc.onclick = function(){
+    breakValue.innerHTML++;
+    breakIncDecHandler();
+  
 }
 breakDec.onclick = function(){
     breakValue.innerHTML--;
-    if(breakValue.innerHTML < 1){
-        breakValue.innerHTML = 1;
-    }
-}
-    return breakValue.innerHTML;
-};
-breaks();
+    breakIncDecHandler();
 
-///////////////////
-
-/// variables for setIntervals 
-
-let interval;
-let secsInterval;
-let breaksInterval;
-let isStarted = false;
-
-
-//setInterval for seconds
-
-let secInterval = ()=>{
-    if(defsecs == "00")   
-    defsecs=60;
-    defminutes--;
-    secsInterval = setInterval(function(){
-        defsecs--;
-        timeLeft.innerHTML = defminutes + ":" +defsecs;
-        if(defsecs <= 0){
-            defsecs= 60;       
-        }
-    },1000);
-}
-///////////////////
-
-let flag = false;
-/// setinterval for minutes
-
-let minsInterval =() =>{
-    defminutes = sessions()-1;
-    interval = setInterval(function(){
-        defminutes--;
-        if (defminutes <= '0') {   
-            if(defsecs <= '59'){
-                if(flag == false){
-                breakFoo();
-            }
-            }
-        }
-        timeLeft.innerHTML = defminutes + ":" + defsecs;    
-    },60000); 
-} 
-
-///////////////////
-
-///break function 
-
-let breakFoo =()=>{
-    label.innerHTML = "Break";
-    audio.play();
-    breakInterval();
-    flag=true;
 }
 
-let breakInterval = () =>{
-    defminutes = breaks()-1;
-    if(defminutes >= '0'){
-    setInterval(() => {
-            if(defminutes <= '0'){
-                if(defsecs <= '59'){
-                    label.innerHTML = "Session";
-                    breakValue.innerHTML = 5;
-                    sessionValue.innerHTML = 25;
-                    timeLeft.innerHTML = "25" + ":" +"00";
-                    clearInterval(secsInterval);
-                    clearInterval(interval);     
-                } 
-            }
-    }, 60000);  isStarted = true;
-} else {
-    clearInterval(minsInterval);
-    setInterval(() => {
-        if(defminutes <= '0'){
-            if(defsecs <= '59'){
-                label.innerHTML = "Session";
-                breakValue.innerHTML = 5;
-                sessionValue.innerHTML = 25;
-                timeLeft.innerHTML = "25" + ":" +"00";
-                clearInterval(secsInterval);
-                clearInterval(interval);     
-            } 
-        }
-    }, 60000);  isStarted = true;
-}
-}
-
-/// start
-
-
-startTimer.onclick = function (){
+startTimer.addEventListener('click',  () => {
     disableButtons(true);
-    if(isStarted==false) {
-        secInterval();
-        minsInterval();
-     isStarted=true;      
-    } 
-};
-///////////////////
+    minutes= sessionValue.innerText-1;
+    seconds = 60;
+    timer = setInterval(()=>{
+        seconds--;
+        if(seconds < 0){
+            seconds = 59;
+            minutes--;
+            if(minutes < 0){
+                clearInterval(timer)
+                breakHandler();
+            }
+        }
+        if(minutes < 10 && minutes >= 0){
+            timeLeft.innerHTML = 
+            `${timeLeft.innerHTML.substr(0,1).includes(0) && '0'+minutes} :
+             ${seconds < 10 ? seconds = '0' + seconds : seconds}`
+        } else 
+            timeLeft.innerHTML = `${minutes} : ${seconds < 10 ? seconds = '0' + seconds : seconds}`
+    },1000)
+})  
 
-/// reset
-
-reset.onclick = function(){
-    breakValue.innerHTML = 5;
-    sessionValue.innerHTML = 25;
-    timeLeft.innerHTML = "25" + ":" +"00";
-    clearInterval(secsInterval)
-    clearInterval(interval);
-    defsecs = '00'; ///   <---- fixed
+const resetFoo = () => {
+    defTimerState();
     disableButtons(false);
-    isStarted=false;
-};
-///////////////////
+}
+
+const breakHandler = () => {
+    label.innerText = 'Break';
+    audio.play();
+    minutes= breakValue.innerText-1;
+    seconds = 59;
+    breakTimer = setInterval(()=>{
+        seconds--;
+        if(seconds < 0){
+            seconds = 59;
+            minutes--;
+            if(minutes < 0){
+                clearInterval(breakTimer)
+                resetFoo();
+            }
+        }
+        if(minutes < 10 && minutes >= 0){
+            timeLeft.innerHTML = 
+            `${timeLeft.innerHTML.substr(0,1).includes(0) && '0'+minutes} :
+             ${seconds < 10 ? seconds = '0' + seconds : seconds}`
+        } else 
+            timeLeft.innerHTML = `${minutes} : ${seconds < 10 ? seconds = '0' + seconds : seconds}`
+    },1000)
+}
+
+reset.addEventListener('click', ()=>{
+    clearInterval(timer);
+    resetFoo();
+})

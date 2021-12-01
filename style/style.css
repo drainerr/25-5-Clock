@@ -110,11 +110,16 @@ body #pomodoro #timer {
   text-align: center;
   font-size: 1.3em;
   border: solid;
+  width: 200px;
   padding: 30px;
   border-radius: 20px;
   background: #0F2027;
   background: -webkit-gradient(linear, left top, right top, from(#2C5364), color-stop(#203A43), to(#0F2027));
   background: linear-gradient(to right, #2C5364, #203A43, #0F2027);
+}
+
+body #pomodoro #timer #time-left {
+  font-size: 32px;
 }
 
 body #pomodoro #timer-controls {
