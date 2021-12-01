@@ -47,11 +47,10 @@ sesInc.addEventListener('click', ()=>{
 
 })
     
-sesDec.onclick = function(){
+sesDec.addEventListener('click', () => {
     sessionValue.innerHTML--;
    sesIncDecHandler();
-}
-
+}) 
 
 const breakIncDecHandler = () => {
     if(breakValue.innerHTML>25){
@@ -62,21 +61,20 @@ const breakIncDecHandler = () => {
         breakValue.innerHTML = 1;
 }
 
-breakInc.onclick = function(){
+breakInc.addEventListener('click', () => {
     breakValue.innerHTML++;
     breakIncDecHandler();
-  
-}
-breakDec.onclick = function(){
+})
+breakDec.addEventListener('click', () => {
     breakValue.innerHTML--;
     breakIncDecHandler();
+})
 
-}
-
-startTimer.addEventListener('click',  () => {
+const timerFoo = (sesBreakVal, callBack) => {
     disableButtons(true);
-    minutes= sessionValue.innerText-1;
-    seconds = 60;
+    minutes= sesBreakVal.innerText-1;
+    seconds = `${isBreakStarted ? 59 : 60}`
+    isBreakStarted = !isBreakStarted;
     timer = setInterval(()=>{
         seconds--;
         if(seconds < 0){
@@ -84,7 +82,7 @@ startTimer.addEventListener('click',  () => {
             minutes--;
             if(minutes < 0){
                 clearInterval(timer)
-                breakHandler();
+                callBack();
             }
         }
         if(minutes < 10 && minutes >= 0){
@@ -94,6 +92,10 @@ startTimer.addEventListener('click',  () => {
         } else 
             timeLeft.innerHTML = `${minutes} : ${seconds < 10 ? seconds = '0' + seconds : seconds}`
     },1000)
+}
+
+startTimer.addEventListener('click',  () => {
+    timerFoo(sessionValue, breakHandler)
 })  
 
 const resetFoo = () => {
@@ -101,28 +103,13 @@ const resetFoo = () => {
     disableButtons(false);
 }
 
+let isBreakStarted = false;
+
 const breakHandler = () => {
+    isBreakStarted = true;
     label.innerText = 'Break';
     audio.play();
-    minutes= breakValue.innerText-1;
-    seconds = 59;
-    breakTimer = setInterval(()=>{
-        seconds--;
-        if(seconds < 0){
-            seconds = 59;
-            minutes--;
-            if(minutes < 0){
-                clearInterval(breakTimer)
-                resetFoo();
-            }
-        }
-        if(minutes < 10 && minutes >= 0){
-            timeLeft.innerHTML = 
-            `${timeLeft.innerHTML.substr(0,1).includes(0) && '0'+minutes} :
-             ${seconds < 10 ? seconds = '0' + seconds : seconds}`
-        } else 
-            timeLeft.innerHTML = `${minutes} : ${seconds < 10 ? seconds = '0' + seconds : seconds}`
-    },1000)
+    timerFoo(breakValue,resetFoo);
 }
 
 reset.addEventListener('click', ()=>{
