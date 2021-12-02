@@ -18,6 +18,7 @@ button:not(#start_stop,#reset):hover{
 }
 body{
     height:100vh;
+    width:100vw;
     display:flex;
     justify-content: center;
     border-radius:20px;
@@ -47,7 +48,7 @@ body{
             flex-direction: row;
             justify-content: space-between;
             margin-top:-10em;
-            width:70vw;
+            width:60vw;
             padding-bottom:7em;
             #break{
                 h3{
@@ -103,7 +104,7 @@ body{
         }
         #timer{
             text-align:center;
-            font-size:2.5em;
+            font-size:2.2em;
             margin-top:2em;
             border:solid;
             display: flex;
@@ -140,4 +141,25 @@ body{
     }
 }   
 
-
+@media only screen and (max-width:900px) {
+    *{
+        margin:0 !important;
+    }
+    body{
+        #pomodoro{
+            top: 0%;
+            transform: none;
+            #break-session{
+                margin-top:2em !important;
+                padding-bottom:3em;
+                font-size:14px;
+                width:70vw !important;
+            }
+            #timer{
+                margin-top: 50px !important;
+                width:80vw;
+                font-size:2em;
+            }
+        }
+    }   
+}

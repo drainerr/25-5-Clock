@@ -10,6 +10,7 @@ const sesDec =document.getElementById('session-decrement');
 const label = document.getElementById('timer-label');
 
 let minutes,seconds;
+let clockSound = new Audio('./audio/Clock.mp3')
 let breakIsOver = new Audio('./audio/Break.mp3');
 let sessionIsOver = new Audio('./audio/Session.mp3')
 
@@ -28,6 +29,7 @@ const disableButtons = (bool) => {
     breakDec.disabled = bool;
     sesInc.disabled = bool;
     sesDec.disabled = bool;
+    startTimer.disabled = bool;
 }
 
 const sesIncDecHandler = ()=> {
@@ -72,10 +74,11 @@ breakDec.addEventListener('click', () => {
 
 /* Implementing a function for Session and Break timers.
         The first parameter will represent the value of Session/Break in minutes,
-        the Second one - callback function
-        and the third one - audio that will notify the client that Session/Break is over.
+        the second one - a callback function (if it's not clear),
+        the third one - audio that will notify the user that Session/Break is over,
+        and the last one - clock sound that will be heared after the timer finally does its job and stops.
 */
-const timerFoo = (sesBreakVal, callBack, audio) => {
+const timerFoo = (sesBreakVal, callBack, audio, clockS) => {
     disableButtons(true);
     minutes= sesBreakVal.innerText-1;
     seconds = `${isBreakStarted ? 59 : 60}`
@@ -88,9 +91,12 @@ const timerFoo = (sesBreakVal, callBack, audio) => {
             if(minutes < 0){
                 clearInterval(timer)
                 audio.play()
-                callBack();   
+                // If  the fourth argument(clock Sound) is passed, then play it after a sec
+                clockS != undefined && setTimeout(()=>  clockS.play(),1000)
+                callBack()
             }
         }
+        // If the number of mins/secs is a one-digit number, then add 0 before it
         if(minutes < 10 && minutes >= 0){
             timeLeft.innerHTML = `${timeLeft.innerHTML.substr(0,1).includes(0) && '0'+minutes} : ${seconds < 10 ? seconds = '0' + seconds : seconds}`
         } else 
@@ -100,7 +106,6 @@ const timerFoo = (sesBreakVal, callBack, audio) => {
 
 startTimer.addEventListener('click',  () => {
     timerFoo(sessionValue, breakHandler, sessionIsOver)
-    startTimer.disabled = true;
 })  
 
 const resetHandler = () => {
@@ -113,11 +118,11 @@ let isBreakStarted = false;
 const breakHandler = () => {
     isBreakStarted = true;
     label.innerText = 'Break';
-    timerFoo(breakValue, resetHandler, breakIsOver);
+    timerFoo(breakValue, resetHandler, breakIsOver, clockSound);
 }
 
 reset.addEventListener('click', ()=>{
     clearInterval(timer);
     resetHandler();
-    startTimer.disabled = false;
+    disableButtons(false);
 })

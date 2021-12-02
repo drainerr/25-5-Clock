@@ -25,6 +25,7 @@ button:not(#start_stop, #reset):hover {
 
 body {
   height: 100vh;
+  width: 100vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -75,7 +76,7 @@ body #pomodoro #break-session {
       -ms-flex-pack: justify;
           justify-content: space-between;
   margin-top: -10em;
-  width: 70vw;
+  width: 60vw;
   padding-bottom: 7em;
 }
 
@@ -149,7 +150,7 @@ body #pomodoro #break-session #session #session-content button:active {
 
 body #pomodoro #timer {
   text-align: center;
-  font-size: 2.5em;
+  font-size: 2.2em;
   margin-top: 2em;
   border: solid;
   display: -webkit-box;
@@ -193,5 +194,27 @@ body #pomodoro #timer-controls button {
 
 body #pomodoro #timer-controls button:active {
   background-color: green;
+}
+
+@media only screen and (max-width: 900px) {
+  * {
+    margin: 0 !important;
+  }
+  body #pomodoro {
+    top: 0%;
+    -webkit-transform: none;
+            transform: none;
+  }
+  body #pomodoro #break-session {
+    margin-top: 2em !important;
+    padding-bottom: 3em;
+    font-size: 14px;
+    width: 70vw !important;
+  }
+  body #pomodoro #timer {
+    margin-top: 50px !important;
+    width: 80vw;
+    font-size: 2em;
+  }
 }
 /*# sourceMappingURL=style.css.map */
