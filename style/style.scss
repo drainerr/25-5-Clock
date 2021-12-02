@@ -2,13 +2,27 @@
 *{
     margin:0;
     padding:0;
-    box-sizing: border-box;
+    border:unset !important;
+    box-sizing:border-box;
+}
+button{
+    background: crimson !important;
+}
+button:hover{
+    cursor:pointer;
+    background-color:darkred !important;
+    transition: .5s;
+}
+button:not(#start_stop,#reset):hover{
+    transform: scale(1.2);
 }
 body{
     height:100vh;
-    border-radius:20px;background: #0F2027; 
-    background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027); 
-    background: linear-gradient(to right, #2C5364, #203A43, #0F2027);
+    display:flex;
+    justify-content: center;
+    border-radius:20px;
+   
+    background: rgb(255, 78, 80);
     font-family: 'Poppins', sans-serif;
     font-weight:lighter;
     text-shadow: 1px 1px black;
@@ -19,21 +33,26 @@ body{
         align-items: center;
         position: absolute;
         top: 50%;
-        left:25%;
         -ms-transform: translateY(-50%);
         transform: translateY(-50%);
         #projectName{
-            margin-bottom:12em;
+            h1{
+                font-size:2.5em;
+                border-bottom: 3px solid white !important;
+                box-shadow: black 0px 1px;
+            }
         }
         #break-session{
             display:flex;
             flex-direction: row;
             justify-content: space-between;
-            width:50vw;
-            margin-bottom:3em;
-            margin-top:-8em;
+            margin-top:-10em;
+            width:70vw;
+            padding-bottom:7em;
             #break{
-
+                h3{
+                    font-size:1.7em;
+                }
                 #break-content{
                     margin-top:20px;
                     display:flex;
@@ -42,10 +61,12 @@ body{
                     //max-width:50%;
                     font-size:1.5em;
                     button{
-                        width: 20px;
+                        width: 25px;
+                        height:25px;
+                        font-size:20px;
                         border:white solid;
                         color:white;
-                        background-color:darkslategrey;
+                        background: #FF4E50;  /* fallback for old browsers */
                         box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
                         &:active{
                             background-color:green;                            
@@ -54,7 +75,9 @@ body{
                 }
             }
             #session{
-
+                h3{
+                    font-size:1.7em;
+                }
                 #session-content{
                     margin-top:20px;
                     display:flex;
@@ -63,7 +86,9 @@ body{
                     //max-width:50%;
                     font-size:1.5em;
                     button{
-                        width: 20px;
+                        width: 25px;
+                        height:25px;
+                        font-size:20px;
                         border:white solid;
                         color:white;
                         border-radius:50%;
@@ -78,25 +103,32 @@ body{
         }
         #timer{
             text-align:center;
-            font-size:1.3em;
+            font-size:2.5em;
+            margin-top:2em;
             border:solid;
-            width:200px;
+            display: flex;
+            flex-direction: column;
+            width: 25vw;
+            justify-content: center;
+            height:40vh;
             padding:30px;
-            border-radius:20px;background: #0F2027; 
-            background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027); 
-            background: linear-gradient(to right, #2C5364, #203A43, #0F2027); 
-            box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+            filter: saturate(200%);
+            border-radius:20px;
+            background: #fffbd5;
+            border: unset;
+            background: -webkit-linear-gradient(to right, #b20a2c, #fffbd5);
+            background: linear-gradient(to right, #b20a2c, #fffbd5);
+            box-shadow: rgba(0, 0, 0 , 0.4) 0px 2px 4px, rgba(0, 0, 0, .3) 0px 7px 13px -3px, rgba(0, 0, 0 , .2) 0px -3px 0px inset;
             #time-left{
-                font-size:32px;
+                font-size:1.2em;
             }
         }
         #timer-controls{
-            margin-top:1em;
             button{
-                padding:5px;
-                border-radius:5px;
+                padding:3px 15px;
+                font-family: 'Poppins', sans-serif;
                 font-weight:bold;
-                border:white solid;
+                font-size:1em;
                 color:white;
                 background-color:darkslategrey;
                 box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
@@ -107,3 +139,5 @@ body{
         }
     }
 }   
+
+
