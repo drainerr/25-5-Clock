@@ -82,7 +82,7 @@ const timerFoo = (sesBreakVal, callBack, audio, clockS) => {
     disableButtons(true);
     minutes= sesBreakVal.innerText-1;
     seconds = `${isBreakStarted ? 59 : 60}`
-    isBreakStarted = !isBreakStarted;
+    isBreakStarted && !isBreakStarted;
     timer = setInterval(()=>{
         seconds--;
         if(seconds < 0){
